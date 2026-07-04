@@ -110,7 +110,7 @@ export function ShareModal({
       >
         {/* Header */}
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-semibold text-foreground">공유하기</h2>
+          <h2 className="text-xl font-semibold text-foreground">공유하기</h2>
           <button
             onClick={onClose}
             aria-label="닫기"

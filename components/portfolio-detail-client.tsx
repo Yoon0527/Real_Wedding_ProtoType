@@ -285,7 +285,7 @@ export function PortfolioDetailClient({
                   {item.region}
                 </span>
               </div>
-              <h1 className="text-balance font-serif text-3xl font-semibold leading-tight text-foreground md:text-4xl">
+              <h1 className="text-balance text-3xl font-semibold leading-tight text-foreground md:text-4xl">
                 {item.title}
               </h1>
             </div>
@@ -309,7 +309,7 @@ export function PortfolioDetailClient({
             {otherWorks.length > 0 && (
               <section className="flex flex-col gap-4 border-t border-border pt-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-serif text-xl font-semibold text-foreground">
+                  <h2 className="text-xl font-semibold text-foreground">
                     플래너의 다른 작업
                   </h2>
                   <div className="flex items-center gap-1.5">
@@ -375,7 +375,7 @@ export function PortfolioDetailClient({
             <section className="flex flex-col gap-4 border-t border-border pt-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <h2 className="font-serif text-xl font-semibold text-foreground">
+                  <h2 className="text-xl font-semibold text-foreground">
                     후기 {planner.reviews}개
                   </h2>
                   <span className="flex items-center gap-1 text-sm font-medium text-foreground">
@@ -584,7 +584,7 @@ export function PortfolioDetailClient({
         {/* Related */}
         {related.length > 0 && (
           <section className="mt-12 border-t border-border pt-8">
-            <h2 className="mb-5 font-serif text-2xl font-semibold text-foreground">
+            <h2 className="mb-5 text-2xl font-semibold text-foreground">
               비슷한 {item.type} 포트폴리오
             </h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -755,7 +755,7 @@ function ReportModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-2 flex items-center justify-between">
-          <h3 className="font-serif text-xl font-semibold text-foreground">
+          <h3 className="text-xl font-semibold text-foreground">
             포트폴리오 신고하기
           </h3>
           <button
@@ -878,7 +878,7 @@ function ReviewWriteModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-5 flex items-center justify-between">
-          <h3 className="font-serif text-xl font-semibold text-foreground">
+          <h3 className="text-xl font-semibold text-foreground">
             후기 작성
           </h3>
           <button

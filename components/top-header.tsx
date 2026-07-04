@@ -16,6 +16,8 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { searchExamples } from '@/lib/wedding-data'
+import { LoginModal } from '@/components/auth/login-modal'
+import { SignupModal } from '@/components/auth/signup-modal'
 
 type Notification = {
   id: string
@@ -58,9 +60,10 @@ const profileMenu = [
 ]
 
 export function TopHeader() {
-  // Auth-aware demo state. Toggle to preview the logged-out experience.
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  // Auth-aware demo state. Starts logged out so the login/signup CTAs are visible.
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [openMenu, setOpenMenu] = useState<'none' | 'profile' | 'bell'>('none')
+  const [authModal, setAuthModal] = useState<'none' | 'login' | 'signup'>('none')
   const containerRef = useRef<HTMLDivElement>(null)
 
   const unreadCount = notifications.filter((n) => n.unread).length
@@ -233,13 +236,13 @@ export function TopHeader() {
           ) : (
             <>
               <button
-                onClick={() => setIsLoggedIn(true)}
+                onClick={() => setAuthModal('login')}
                 className="rounded-full px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
                 로그인
               </button>
               <button
-                onClick={() => setIsLoggedIn(true)}
+                onClick={() => setAuthModal('signup')}
                 className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
               >
                 회원가입
@@ -248,6 +251,20 @@ export function TopHeader() {
           )}
         </div>
       </div>
+
+      {/* Auth modals */}
+      {authModal === 'login' && (
+        <LoginModal
+          onClose={() => setAuthModal('none')}
+          onOpenSignup={() => setAuthModal('signup')}
+        />
+      )}
+      {authModal === 'signup' && (
+        <SignupModal
+          onClose={() => setAuthModal('none')}
+          onOpenLogin={() => setAuthModal('login')}
+        />
+      )}
     </header>
   )
 }

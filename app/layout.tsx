@@ -1,22 +1,12 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import { Noto_Sans_KR, Geist_Mono, Cormorant_Garamond } from 'next/font/google'
+import { Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
-const notoSansKR = Noto_Sans_KR({
-  variable: '--font-noto-sans-kr',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-})
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
-})
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -34,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${notoSansKR.variable} ${geistMono.variable} ${cormorant.variable}`}
+      className={`${geistMono.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">

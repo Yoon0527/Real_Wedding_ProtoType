@@ -50,7 +50,7 @@ export function LeftSidebar() {
     <aside className="hidden lg:flex w-64 shrink-0 flex-col gap-6 overflow-y-auto no-scrollbar border-r border-border bg-sidebar px-5 py-6">
       {/* Logo */}
       <Link href="/" className="flex flex-col gap-1">
-        <span className="font-serif text-2xl font-semibold leading-none text-foreground">
+        <span className="text-2xl font-semibold leading-none text-foreground">
           리얼웨딩
         </span>
         <span className="text-[11px] leading-relaxed text-muted-foreground">
@@ -126,7 +126,7 @@ export function LeftSidebar() {
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="font-serif text-base font-semibold text-foreground">
+            <span className="text-base font-semibold text-foreground">
               {plannerMode ? '플래너 모드' : '플래너 모드 전환'}
             </span>
             {plannerMode && (

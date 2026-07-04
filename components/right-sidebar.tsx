@@ -16,13 +16,13 @@ export function RightSidebar() {
     <aside className="hidden xl:flex w-[300px] shrink-0 flex-col gap-5 overflow-y-auto no-scrollbar border-l border-border bg-sidebar px-5 py-6">
       {/* Section 1 — This week's popular planners */}
       <section className="shrink-0 rounded-2xl border border-border bg-card p-4 shadow-sm">
-        <h3 className="mb-3 font-serif text-lg font-semibold text-foreground">
+        <h3 className="mb-3 text-lg font-semibold text-foreground">
           이번 주 인기 플래너
         </h3>
         <div className="flex flex-col gap-3">
           {ranking.map((p, i) => (
             <div key={p.id} className="flex items-center gap-3">
-              <span className="w-4 text-center font-serif text-lg font-semibold text-primary">
+              <span className="w-4 text-center text-lg font-semibold text-primary">
                 {i + 1}
               </span>
               <Image

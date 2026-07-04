@@ -70,7 +70,7 @@ export function ConsultationModal({
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-6 py-4">
-          <h2 className="font-serif text-xl font-semibold text-foreground">
+          <h2 className="text-xl font-semibold text-foreground">
             상담 신청하기
           </h2>
           <button

@@ -13,7 +13,7 @@ export function HeroBanner() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-center gap-3 px-6 sm:px-10 md:px-12">
-        <h1 className="font-serif text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
+        <h1 className="text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
           플래너 라운지
         </h1>
         <p className="max-w-md text-pretty text-sm leading-relaxed text-white/85 sm:text-base">

@@ -111,7 +111,7 @@ export default function BookmarksPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between border-b border-border px-5 py-4">
-                  <h2 className="font-serif text-lg font-semibold text-foreground">
+                  <h2 className="text-lg font-semibold text-foreground">
                     플래너 비교 ({selectedItems.length})
                   </h2>
                   <button

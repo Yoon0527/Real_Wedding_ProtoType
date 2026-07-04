@@ -29,7 +29,7 @@ export function AdCard({ ad }: { ad: Advertisement }) {
 
       {/* Body */}
       <div className="flex flex-col gap-1 p-4">
-        <span className="font-serif text-base font-semibold leading-snug text-foreground">
+        <span className="text-base font-semibold leading-snug text-foreground">
           {ad.title}
         </span>
         <span className="text-sm font-medium text-primary">{ad.subtitle}</span>

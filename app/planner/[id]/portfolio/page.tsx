@@ -45,7 +45,7 @@ export default async function PlannerPortfolioPage({
           />
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="font-serif text-2xl font-semibold text-foreground">
+              <h1 className="text-2xl font-semibold text-foreground">
                 {planner.name} 플래너
               </h1>
               {planner.verified && <BadgeCheck className="size-5 text-primary" />}
@@ -60,7 +60,7 @@ export default async function PlannerPortfolioPage({
           </div>
         </div>
 
-        <h2 className="mb-5 font-serif text-xl font-semibold text-foreground">
+        <h2 className="mb-5 text-xl font-semibold text-foreground">
           전체 포트폴리오
         </h2>
 

@@ -15,7 +15,7 @@ export function PageHeader({
   return (
     <div className="flex flex-wrap items-end justify-between gap-3">
       <div className="flex flex-col gap-1">
-        <h1 className="flex items-center gap-2 font-serif text-2xl font-semibold text-foreground">
+        <h1 className="flex items-center gap-2 text-2xl font-semibold text-foreground">
           {title}
           {typeof count === 'number' && (
             <span className="text-base font-normal text-muted-foreground">{count}</span>
@@ -45,7 +45,7 @@ export function EmptyState({
         {icon}
       </div>
       <div className="flex flex-col gap-1">
-        <h2 className="font-serif text-lg font-semibold text-foreground">{title}</h2>
+        <h2 className="text-lg font-semibold text-foreground">{title}</h2>
         <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{description}</p>
       </div>
       <Link
