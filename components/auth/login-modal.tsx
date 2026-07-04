@@ -72,18 +72,18 @@ export function LoginModal({ onClose, onOpenSignup }: LoginModalProps) {
   if (status === "suspended") {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" onClick={onClose}>
-        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
-          <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
-            <AlertCircle className="h-8 w-8 text-red-500" />
+        <div className="bg-card rounded-2xl shadow-lg w-full max-w-sm p-8 flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
+          <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
+            <AlertCircle className="h-8 w-8 text-destructive" />
           </div>
           <div className="text-center space-y-2">
-            <h2 className="text-lg font-bold text-gray-900">계정 이용 정지</h2>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <h2 className="text-lg font-bold text-foreground">계정 이용 정지</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
               서비스 이용이 정지된 계정입니다.<br />
               자세한 내용은 고객센터에 문의해 주세요.
             </p>
           </div>
-          <button className="w-full py-3 rounded-xl bg-gray-100 text-gray-700 text-sm font-semibold hover:bg-gray-200 transition-colors" onClick={onClose}>
+          <button className="w-full py-3 rounded-xl bg-muted text-foreground text-sm font-semibold hover:bg-accent transition-colors" onClick={onClose}>
             확인
           </button>
         </div>
@@ -97,17 +97,17 @@ export function LoginModal({ onClose, onOpenSignup }: LoginModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="bg-card rounded-2xl shadow-lg w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">로그인</h1>
-            <p className="text-xs text-gray-500 mt-0.5">리얼웨딩에 오신 것을 환영합니다</p>
+            <h1 className="text-xl font-bold text-foreground">로그인</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">리얼웨딩에 오신 것을 환영합니다</p>
           </div>
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-            <X className="h-5 w-5 text-gray-400" />
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-muted transition-colors">
+            <X className="h-5 w-5 text-muted-foreground" />
           </button>
         </div>
 
@@ -123,14 +123,14 @@ export function LoginModal({ onClose, onOpenSignup }: LoginModalProps) {
 
         {/* Tab toggle */}
         <div className="px-6">
-          <div className="flex gap-1 p-1 bg-gray-100 rounded-xl">
+          <div className="flex gap-1 p-1 bg-muted rounded-xl">
             {(["social", "email"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
                 className={cn(
                   "flex-1 py-2 rounded-lg text-sm font-medium transition-all",
-                  tab === t ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                  tab === t ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {t === "social" ? "소셜 로그인" : "이메일 로그인"}
@@ -153,44 +153,44 @@ export function LoginModal({ onClose, onOpenSignup }: LoginModalProps) {
                 <span className="flex-1 text-center text-sm font-semibold text-white">네이버로 계속하기</span>
               </button>
               {/* Apple */}
-              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-900 hover:bg-black transition-colors text-white">
+              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#111111] hover:bg-black transition-colors text-white">
                 <AppleIcon />
                 <span className="flex-1 text-center text-sm font-semibold">Apple로 계속하기</span>
               </button>
               {/* Google */}
-              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
+              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-card border border-border hover:bg-muted transition-colors">
                 <GoogleIcon />
-                <span className="flex-1 text-center text-sm font-semibold text-gray-700">Google로 계속하기</span>
+                <span className="flex-1 text-center text-sm font-semibold text-foreground">Google로 계속하기</span>
               </button>
             </>
           ) : (
             <>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">이메일</label>
+                  <label className="block text-xs font-medium text-foreground mb-1.5">이메일</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="이메일 주소 입력"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
-                  <p className="text-[10px] text-gray-400 mt-1">힌트: "pending@" 또는 "suspended@" 입력시 상태 테스트</p>
+                  <p className="text-[10px] text-muted-foreground mt-1">힌트: "pending@" 또는 "suspended@" 입력시 상태 테스트</p>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">비밀번호</label>
+                  <label className="block text-xs font-medium text-foreground mb-1.5">비밀번호</label>
                   <div className="relative">
                     <input
                       type={showPw ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="비밀번호 입력"
-                      className="w-full px-4 py-3 pr-10 rounded-xl border border-gray-200 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                      className="w-full px-4 py-3 pr-10 rounded-xl border border-border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPw((v) => !v)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     >
                       {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -204,23 +204,23 @@ export function LoginModal({ onClose, onOpenSignup }: LoginModalProps) {
                   "w-full py-3 rounded-xl text-sm font-bold transition-all",
                   email && password
                     ? "bg-primary text-primary-foreground hover:opacity-90"
-                    : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "bg-muted text-muted-foreground cursor-not-allowed"
                 )}
               >
                 {status === "loading" ? "로그인 중..." : "로그인"}
               </button>
-              <div className="flex items-center justify-center gap-4 text-xs text-gray-400">
-                <button className="hover:text-gray-600 transition-colors">아이디 찾기</button>
+              <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                <button className="hover:text-foreground transition-colors">아이디 찾기</button>
                 <span>|</span>
-                <button className="hover:text-gray-600 transition-colors">비밀번호 찾기</button>
+                <button className="hover:text-foreground transition-colors">비밀번호 찾기</button>
               </div>
             </>
           )}
         </div>
 
         {/* Footer */}
-        <div className="px-6 pb-6 pt-2 border-t border-gray-100 flex items-center justify-center gap-1.5 text-sm">
-          <span className="text-gray-500">아직 회원이 아니신가요?</span>
+        <div className="px-6 pb-6 pt-2 border-t border-border flex items-center justify-center gap-1.5 text-sm">
+          <span className="text-muted-foreground">아직 회원이 아니신가요?</span>
           <button
             onClick={() => { onClose(); onOpenSignup() }}
             className="font-semibold text-primary hover:opacity-80 transition-opacity"

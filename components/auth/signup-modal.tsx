@@ -40,10 +40,10 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
   return (
     <div className="px-6 pt-5 pb-2">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-gray-500 font-medium">{current} / {total} 단계</span>
+        <span className="text-xs text-muted-foreground font-medium">{current} / {total} 단계</span>
         <span className="text-xs font-semibold text-primary">{pct}%</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
         <div
           className="h-full rounded-full bg-primary transition-all duration-500"
           style={{ width: `${pct}%` }}
@@ -83,19 +83,19 @@ function StepPhone({ onNext }: { onNext: () => void }) {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">본인 인증</h2>
-        <p className="text-sm text-gray-500 mt-1">PASS 인증으로 본인 확인을 진행해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">본인 인증</h2>
+        <p className="text-sm text-muted-foreground mt-1">PASS 인증으로 본인 확인을 진행해 주세요.</p>
       </div>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">휴대폰 번호</label>
+          <label className="block text-xs font-medium text-foreground mb-1.5">휴대폰 번호</label>
           <div className="flex gap-2">
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 11))}
               placeholder="01012345678"
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              className="flex-1 px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
             />
             <button
               onClick={sendCode}
@@ -104,7 +104,7 @@ function StepPhone({ onNext }: { onNext: () => void }) {
                 "px-4 py-3 rounded-xl text-sm font-semibold transition-colors whitespace-nowrap",
                 phone.length >= 10
                   ? "bg-primary text-primary-foreground hover:opacity-90"
-                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-muted text-muted-foreground cursor-not-allowed"
               )}
             >
               {sent ? "재전송" : "인증번호 전송"}
@@ -113,7 +113,7 @@ function StepPhone({ onNext }: { onNext: () => void }) {
         </div>
         {sent && (
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">인증번호 6자리</label>
+            <label className="block text-xs font-medium text-foreground mb-1.5">인증번호 6자리</label>
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <input
@@ -122,12 +122,12 @@ function StepPhone({ onNext }: { onNext: () => void }) {
                   onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                   placeholder="123456"
                   className={cn(
-                    "w-full px-4 py-3 pr-16 rounded-xl border bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-primary transition-colors",
-                    verified ? "border-green-300 focus:ring-green-200" : "border-gray-200 focus:ring-primary/30"
+                    "w-full px-4 py-3 pr-16 rounded-xl border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:border-primary transition-colors",
+                    verified ? "border-green-300 focus:ring-green-200" : "border-border focus:ring-primary/30"
                   )}
                 />
                 {timer > 0 && !verified && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-red-500 tabular-nums font-medium">
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-destructive tabular-nums font-medium">
                     {formatTimer(timer)}
                   </span>
                 )}
@@ -141,7 +141,7 @@ function StepPhone({ onNext }: { onNext: () => void }) {
                   disabled={code.length !== 6}
                   className={cn(
                     "px-4 py-3 rounded-xl text-sm font-semibold transition-colors",
-                    code.length === 6 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    code.length === 6 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
                   )}
                 >
                   확인
@@ -161,7 +161,7 @@ function StepPhone({ onNext }: { onNext: () => void }) {
         disabled={!verified}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          verified ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          verified ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
@@ -190,34 +190,34 @@ function StepTerms({ onNext }: { onNext: () => void }) {
     >
       <span className={cn(
         "w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors",
-        checked ? "bg-primary border-primary" : "border-gray-300"
+        checked ? "bg-primary border-primary" : "border-muted-foreground/30"
       )}>
-        {checked && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
+        {checked && <Check className="h-3 w-3 text-primary-foreground" strokeWidth={3} />}
       </span>
-      <span className="flex-1 text-sm text-gray-700">{label}</span>
-      {optional && <span className="text-xs text-gray-400 flex-shrink-0">(선택)</span>}
-      {!optional && <span className="text-xs text-red-400 flex-shrink-0">(필수)</span>}
+      <span className="flex-1 text-sm text-foreground">{label}</span>
+      {optional && <span className="text-xs text-muted-foreground flex-shrink-0">(선택)</span>}
+      {!optional && <span className="text-xs text-destructive flex-shrink-0">(필수)</span>}
     </button>
   )
 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">약관 동의</h2>
-        <p className="text-sm text-gray-500 mt-1">서비스 이용을 위해 약관에 동의해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">약관 동의</h2>
+        <p className="text-sm text-muted-foreground mt-1">서비스 이용을 위해 약관에 동의해 주세요.</p>
       </div>
-      <div className="bg-gray-50 rounded-xl border border-gray-200 divide-y divide-gray-200 px-4">
+      <div className="bg-muted rounded-xl border border-border divide-y divide-border px-4">
         <button
           onClick={() => toggleAll(!all)}
           className="w-full flex items-center gap-3 py-3.5"
         >
           <span className={cn(
             "w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors",
-            all ? "bg-primary border-primary" : "border-gray-300"
+            all ? "bg-primary border-primary" : "border-muted-foreground/30"
           )}>
-            {all && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
+            {all && <Check className="h-3 w-3 text-primary-foreground" strokeWidth={3} />}
           </span>
-          <span className="flex-1 text-sm font-semibold text-gray-900">전체 동의</span>
+          <span className="flex-1 text-sm font-semibold text-foreground">전체 동의</span>
         </button>
         <div className="py-1 space-y-0.5">
           <CheckRow label="서비스 이용약관" checked={required1} onChange={setRequired1} />
@@ -230,7 +230,7 @@ function StepTerms({ onNext }: { onNext: () => void }) {
         disabled={!canProceed}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          canProceed ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          canProceed ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         동의하고 계속
@@ -251,8 +251,8 @@ function StepRole({ onNext }: { onNext: (role: Role) => void }) {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">어떤 분이신가요?</h2>
-        <p className="text-sm text-gray-500 mt-1">역할을 선택하면 맞춤 기능을 제공해 드립니다.</p>
+        <h2 className="text-xl font-bold text-foreground">어떤 분이신가요?</h2>
+        <p className="text-sm text-muted-foreground mt-1">역할을 선택하면 맞춤 기능을 제공해 드립니다.</p>
       </div>
       <div className="space-y-2">
         {roles.map((r) => (
@@ -263,19 +263,19 @@ function StepRole({ onNext }: { onNext: (role: Role) => void }) {
               "w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border-2 transition-all text-left",
               selected === r.value
                 ? "border-primary bg-primary/5"
-                : "border-gray-200 bg-white hover:border-gray-300"
+                : "border-border bg-card hover:border-muted-foreground/40"
             )}
           >
             <span className="text-2xl">{r.icon}</span>
             <div className="flex-1">
-              <p className={cn("text-sm font-semibold", selected === r.value ? "text-primary" : "text-gray-900")}>{r.value}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{r.desc}</p>
+              <p className={cn("text-sm font-semibold", selected === r.value ? "text-primary" : "text-foreground")}>{r.value}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{r.desc}</p>
             </div>
             <span className={cn(
               "w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors",
-              selected === r.value ? "border-primary bg-primary" : "border-gray-300"
+              selected === r.value ? "border-primary bg-primary" : "border-muted-foreground/30"
             )}>
-              {selected === r.value && <span className="w-2 h-2 rounded-full bg-white" />}
+              {selected === r.value && <span className="w-2 h-2 rounded-full bg-primary-foreground" />}
             </span>
           </button>
         ))}
@@ -285,7 +285,7 @@ function StepRole({ onNext }: { onNext: (role: Role) => void }) {
         disabled={!selected}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          selected ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          selected ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
@@ -302,8 +302,8 @@ function StepNickname({ onNext }: { onNext: (nickname: string) => void }) {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">닉네임을 입력해 주세요</h2>
-        <p className="text-sm text-gray-500 mt-1">2~10자 이내로 설정해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">닉네임을 입력해 주세요</h2>
+        <p className="text-sm text-muted-foreground mt-1">2~10자 이내로 설정해 주세요.</p>
       </div>
       <div>
         <div className="relative">
@@ -313,20 +313,20 @@ function StepNickname({ onNext }: { onNext: (nickname: string) => void }) {
             onChange={(e) => setValue(e.target.value.slice(0, 10))}
             placeholder="닉네임 입력"
             className={cn(
-              "w-full px-4 py-3 pr-16 rounded-xl border bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-colors",
+              "w-full px-4 py-3 pr-16 rounded-xl border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-colors",
               isValid && !isDuplicate
                 ? "border-green-300 focus:ring-green-200"
                 : value.length > 0
-                ? "border-red-300 focus:ring-red-200"
-                : "border-gray-200 focus:ring-primary/30 focus:border-primary"
+                ? "border-destructive/40 focus:ring-destructive/20"
+                : "border-border focus:ring-primary/30 focus:border-primary"
             )}
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 tabular-nums">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground tabular-nums">
             {value.length}/10
           </span>
         </div>
         {value.length > 0 && (
-          <p className={cn("text-xs mt-1.5 flex items-center gap-1", isValid && !isDuplicate ? "text-green-600" : "text-red-500")}>
+          <p className={cn("text-xs mt-1.5 flex items-center gap-1", isValid && !isDuplicate ? "text-green-600" : "text-destructive")}>
             {isValid && !isDuplicate ? (
               <><Check className="h-3 w-3" /> 사용 가능한 닉네임입니다.</>
             ) : isDuplicate ? (
@@ -342,7 +342,7 @@ function StepNickname({ onNext }: { onNext: (nickname: string) => void }) {
         disabled={!isValid || isDuplicate}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          isValid && !isDuplicate ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          isValid && !isDuplicate ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
@@ -361,26 +361,26 @@ function StepWeddingDate({ onNext, onSkip }: { onNext: (date: string) => void; o
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">결혼 예정일</h2>
-        <p className="text-sm text-gray-500 mt-1">예정된 웨딩 날짜를 알려주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">결혼 예정일</h2>
+        <p className="text-sm text-muted-foreground mt-1">예정된 웨딩 날짜를 알려주세요.</p>
       </div>
       <div className="flex gap-3">
         <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">년도</label>
+          <label className="block text-xs font-medium text-foreground mb-1.5">년도</label>
           <select
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
           >
             {years.map((y) => <option key={y} value={y}>{y}년</option>)}
           </select>
         </div>
         <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">월</label>
+          <label className="block text-xs font-medium text-foreground mb-1.5">월</label>
           <select
             value={month}
             onChange={(e) => setMonth(Number(e.target.value))}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
           >
             {months.map((m) => <option key={m} value={m}>{m}월</option>)}
           </select>
@@ -393,7 +393,7 @@ function StepWeddingDate({ onNext, onSkip }: { onNext: (date: string) => void; o
         다음
       </button>
       {onSkip && (
-        <button onClick={onSkip} className="w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+        <button onClick={onSkip} className="w-full py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
           나중에 설정
         </button>
       )}
@@ -411,8 +411,8 @@ function StepRegion({ onNext, onSkip }: { onNext: (regions: string[]) => void; o
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">웨딩 지역 선택</h2>
-        <p className="text-sm text-gray-500 mt-1">관심 지역을 최대 2곳까지 선택해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">웨딩 지역 선택</h2>
+        <p className="text-sm text-muted-foreground mt-1">관심 지역을 최대 2곳까지 선택해 주세요.</p>
       </div>
       <div className="flex flex-wrap gap-2">
         {PROVINCES.map((p) => (
@@ -423,7 +423,7 @@ function StepRegion({ onNext, onSkip }: { onNext: (regions: string[]) => void; o
               "px-3.5 py-2 rounded-xl text-sm font-medium border-2 transition-all",
               regions.includes(p)
                 ? "border-primary bg-primary/5 text-primary"
-                : "border-gray-200 text-gray-600 hover:border-gray-300",
+                : "border-border text-muted-foreground hover:border-muted-foreground/40",
               !regions.includes(p) && regions.length >= 2 && "opacity-40 cursor-not-allowed"
             )}
           >
@@ -436,12 +436,12 @@ function StepRegion({ onNext, onSkip }: { onNext: (regions: string[]) => void; o
         disabled={regions.length === 0}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          regions.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          regions.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
       </button>
-      <button onClick={onSkip} className="w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+      <button onClick={onSkip} className="w-full py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
         건너뛰기
       </button>
     </div>
@@ -453,8 +453,8 @@ function StepBudget({ onNext, onSkip }: { onNext: (b: string) => void; onSkip: (
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">총 웨딩 예산</h2>
-        <p className="text-sm text-gray-500 mt-1">대략적인 총 예산을 선택해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">총 웨딩 예산</h2>
+        <p className="text-sm text-muted-foreground mt-1">대략적인 총 예산을 선택해 주세요.</p>
       </div>
       <div className="space-y-2">
         {BUDGET_OPTIONS.map((b) => (
@@ -463,17 +463,17 @@ function StepBudget({ onNext, onSkip }: { onNext: (b: string) => void; onSkip: (
             onClick={() => setSelected(b.value)}
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 transition-all text-left",
-              selected === b.value ? "border-primary bg-primary/5" : "border-gray-200 hover:border-gray-300"
+              selected === b.value ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/40"
             )}
           >
-            <span className={cn("flex-1 text-sm font-medium", selected === b.value ? "text-primary" : "text-gray-700")}>
+            <span className={cn("flex-1 text-sm font-medium", selected === b.value ? "text-primary" : "text-foreground")}>
               {b.label}
             </span>
             <span className={cn(
               "w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors",
-              selected === b.value ? "border-primary bg-primary" : "border-gray-300"
+              selected === b.value ? "border-primary bg-primary" : "border-muted-foreground/30"
             )}>
-              {selected === b.value && <span className="w-2 h-2 rounded-full bg-white" />}
+              {selected === b.value && <span className="w-2 h-2 rounded-full bg-primary-foreground" />}
             </span>
           </button>
         ))}
@@ -483,12 +483,12 @@ function StepBudget({ onNext, onSkip }: { onNext: (b: string) => void; onSkip: (
         disabled={!selected}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          selected ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          selected ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
       </button>
-      <button onClick={onSkip} className="w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+      <button onClick={onSkip} className="w-full py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
         건너뛰기
       </button>
     </div>
@@ -503,8 +503,8 @@ function StepStyle({ onNext, onSkip }: { onNext: (styles: string[]) => void; onS
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">웨딩 스타일</h2>
-        <p className="text-sm text-gray-500 mt-1">원하는 웨딩 분위기를 모두 선택해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">웨딩 스타일</h2>
+        <p className="text-sm text-muted-foreground mt-1">원하는 웨딩 분위기를 모두 선택해 주세요.</p>
       </div>
       <div className="flex flex-wrap gap-2">
         {WEDDING_STYLES.map((s) => (
@@ -515,7 +515,7 @@ function StepStyle({ onNext, onSkip }: { onNext: (styles: string[]) => void; onS
               "px-4 py-2 rounded-full text-sm font-medium border-2 transition-all",
               selected.includes(s)
                 ? "border-primary bg-primary text-primary-foreground"
-                : "border-gray-200 text-gray-600 hover:border-gray-300"
+                : "border-border text-muted-foreground hover:border-muted-foreground/40"
             )}
           >
             #{s}
@@ -527,12 +527,12 @@ function StepStyle({ onNext, onSkip }: { onNext: (styles: string[]) => void; onS
         disabled={selected.length === 0}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          selected.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          selected.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
       </button>
-      <button onClick={onSkip} className="w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+      <button onClick={onSkip} className="w-full py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
         건너뛰기
       </button>
     </div>
@@ -549,34 +549,34 @@ function StepPlannerInfo({ onNext }: { onNext: (data: { company: string; positio
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">플래너 정보</h2>
-        <p className="text-sm text-gray-500 mt-1">업체명과 직함을 입력해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">플래너 정보</h2>
+        <p className="text-sm text-muted-foreground mt-1">업체명과 직함을 입력해 주세요.</p>
       </div>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">실명 (인증 정보)</label>
-          <div className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-100 text-sm text-gray-500 select-none">
+          <label className="block text-xs font-medium text-foreground mb-1.5">실명 (인증 정보)</label>
+          <div className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-muted-foreground select-none">
             홍길동 (PASS 인증 완료)
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">업체명</label>
+          <label className="block text-xs font-medium text-foreground mb-1.5">업체명</label>
           <input
             type="text"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
             placeholder="예: 로맨틱 웨딩 플래너"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1.5">직함</label>
+          <label className="block text-xs font-medium text-foreground mb-1.5">직함</label>
           <input
             type="text"
             value={position}
             onChange={(e) => setPosition(e.target.value)}
             placeholder="예: 수석 웨딩 플래너"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
           />
         </div>
       </div>
@@ -585,7 +585,7 @@ function StepPlannerInfo({ onNext }: { onNext: (data: { company: string; positio
         disabled={!canProceed}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          canProceed ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          canProceed ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
@@ -603,8 +603,8 @@ function StepPlannerRegion({ onNext }: { onNext: (regions: string[]) => void }) 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">서비스 지역</h2>
-        <p className="text-sm text-gray-500 mt-1">주로 활동하는 지역을 최대 2곳 선택해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">서비스 지역</h2>
+        <p className="text-sm text-muted-foreground mt-1">주로 활동하는 지역을 최대 2곳 선택해 주세요.</p>
       </div>
       <div className="flex flex-wrap gap-2">
         {PROVINCES.map((p) => (
@@ -615,7 +615,7 @@ function StepPlannerRegion({ onNext }: { onNext: (regions: string[]) => void }) 
               "px-3.5 py-2 rounded-xl text-sm font-medium border-2 transition-all",
               regions.includes(p)
                 ? "border-primary bg-primary/5 text-primary"
-                : "border-gray-200 text-gray-600 hover:border-gray-300",
+                : "border-border text-muted-foreground hover:border-muted-foreground/40",
               !regions.includes(p) && regions.length >= 2 && "opacity-40 cursor-not-allowed"
             )}
           >
@@ -628,7 +628,7 @@ function StepPlannerRegion({ onNext }: { onNext: (regions: string[]) => void }) 
         disabled={regions.length === 0}
         className={cn(
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
-          regions.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          regions.length > 0 ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         다음
@@ -646,7 +646,7 @@ function StepPlannerUpload({ onNext }: { onNext: () => void }) {
       onClick={onUpload}
       className={cn(
         "w-full flex flex-col items-center justify-center gap-2 py-8 rounded-2xl border-2 border-dashed transition-all",
-        uploaded ? "border-green-300 bg-green-50" : "border-gray-200 bg-gray-50 hover:border-gray-300 hover:bg-gray-100"
+        uploaded ? "border-green-300 bg-green-50" : "border-border bg-muted hover:border-muted-foreground/40 hover:bg-accent"
       )}
     >
       {uploaded ? (
@@ -658,11 +658,11 @@ function StepPlannerUpload({ onNext }: { onNext: () => void }) {
         </>
       ) : (
         <>
-          <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-            <Upload className="h-5 w-5 text-gray-400" />
+          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+            <Upload className="h-5 w-5 text-muted-foreground" />
           </div>
-          <span className="text-sm font-medium text-gray-600">{label}</span>
-          <span className="text-xs text-gray-400">JPG, PNG, PDF 지원</span>
+          <span className="text-sm font-medium text-foreground">{label}</span>
+          <span className="text-xs text-muted-foreground">JPG, PNG, PDF 지원</span>
         </>
       )}
     </button>
@@ -671,8 +671,8 @@ function StepPlannerUpload({ onNext }: { onNext: () => void }) {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">서류 업로드</h2>
-        <p className="text-sm text-gray-500 mt-1">플래너 인증을 위한 서류를 첨부해 주세요.</p>
+        <h2 className="text-xl font-bold text-foreground">서류 업로드</h2>
+        <p className="text-sm text-muted-foreground mt-1">플래너 인증을 위한 서류를 첨부해 주세요.</p>
       </div>
       <div className="space-y-3">
         <UploadZone
@@ -698,7 +698,7 @@ function StepPlannerUpload({ onNext }: { onNext: () => void }) {
           "w-full py-3.5 rounded-xl text-sm font-bold transition-all",
           cardUploaded && licenseUploaded
             ? "bg-primary text-primary-foreground hover:opacity-90"
-            : "bg-gray-100 text-gray-400 cursor-not-allowed"
+            : "bg-muted text-muted-foreground cursor-not-allowed"
         )}
       >
         가입 신청 완료
@@ -717,10 +717,10 @@ function StepDone({ isPlanner, onClose }: { isPlanner: boolean; onClose: () => v
         }
       </div>
       <div className="space-y-2">
-        <h2 className="text-xl font-bold text-gray-900">
+        <h2 className="text-xl font-bold text-foreground">
           {isPlanner ? "신청이 완료되었습니다!" : "회원가입 완료!"}
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed">
           {isPlanner
             ? "서류 검토 후 플래너 기능이 활성화됩니다.\n결과는 등록하신 연락처로 안내드립니다."
             : "리얼웨딩에 오신 것을 환영합니다.\n팩트 인증된 결혼 정보를 마음껏 활용하세요!"}
@@ -786,7 +786,7 @@ export function SignupModal({ onClose, onOpenLogin }: SignupModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200"
+        className="bg-card rounded-2xl shadow-lg w-full max-w-sm overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200"
         style={{ maxHeight: "90dvh" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -794,14 +794,14 @@ export function SignupModal({ onClose, onOpenLogin }: SignupModalProps) {
         <div className="flex items-center justify-between px-6 pt-5 pb-0">
           <button
             onClick={step === 0 ? onClose : goBack}
-            className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors"
             aria-label="뒤로"
           >
-            {step === 0 ? <X className="h-5 w-5 text-gray-400" /> : <ChevronLeft className="h-5 w-5 text-gray-500" />}
+            {step === 0 ? <X className="h-5 w-5 text-muted-foreground" /> : <ChevronLeft className="h-5 w-5 text-muted-foreground" />}
           </button>
-          <span className="text-xs font-medium text-gray-400">회원가입</span>
-          <button onClick={onClose} className="p-2 -mr-2 rounded-full hover:bg-gray-100 transition-colors">
-            <X className="h-5 w-5 text-gray-400" />
+          <span className="text-xs font-medium text-muted-foreground">회원가입</span>
+          <button onClick={onClose} className="p-2 -mr-2 rounded-full hover:bg-muted transition-colors">
+            <X className="h-5 w-5 text-muted-foreground" />
           </button>
         </div>
 
@@ -833,8 +833,8 @@ export function SignupModal({ onClose, onOpenLogin }: SignupModalProps) {
 
         {/* Footer link (hide on done) */}
         {!isDone && (
-          <div className="px-6 pb-5 pt-2 border-t border-gray-100 flex items-center justify-center gap-1.5 text-sm">
-            <span className="text-gray-500">이미 계정이 있으신가요?</span>
+          <div className="px-6 pb-5 pt-2 border-t border-border flex items-center justify-center gap-1.5 text-sm">
+            <span className="text-muted-foreground">이미 계정이 있으신가요?</span>
             <button
               onClick={() => { onClose(); onOpenLogin() }}
               className="font-semibold text-primary hover:opacity-80 transition-opacity"
