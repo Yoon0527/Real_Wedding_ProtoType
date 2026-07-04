@@ -79,6 +79,7 @@ export function TopHeader() {
   }, [])
 
   return (
+    <>
     <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="flex items-center gap-4 px-4 py-3 md:px-6">
         {/* Search */}
@@ -251,20 +252,23 @@ export function TopHeader() {
           )}
         </div>
       </div>
-
-      {/* Auth modals */}
-      {authModal === 'login' && (
-        <LoginModal
-          onClose={() => setAuthModal('none')}
-          onOpenSignup={() => setAuthModal('signup')}
-        />
-      )}
-      {authModal === 'signup' && (
-        <SignupModal
-          onClose={() => setAuthModal('none')}
-          onOpenLogin={() => setAuthModal('login')}
-        />
-      )}
     </header>
+
+    {/* Auth modals — rendered OUTSIDE <header>. The header's `backdrop-blur-md`
+        creates a containing block that would otherwise trap the modals'
+        `position: fixed` inside the ~64px header instead of the viewport. */}
+    {authModal === 'login' && (
+      <LoginModal
+        onClose={() => setAuthModal('none')}
+        onOpenSignup={() => setAuthModal('signup')}
+      />
+    )}
+    {authModal === 'signup' && (
+      <SignupModal
+        onClose={() => setAuthModal('none')}
+        onOpenLogin={() => setAuthModal('login')}
+      />
+    )}
+    </>
   )
 }
