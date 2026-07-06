@@ -14,6 +14,7 @@ import {
   ArrowRight,
   User,
   Briefcase,
+  Settings,
 } from 'lucide-react'
 
 const mainNav = [
@@ -21,6 +22,7 @@ const mainNav = [
   { icon: Sparkles, label: '플래너 라운지', href: '/' },
   { icon: Heart, label: '마이 웨딩', href: '/wedding' },
   { icon: User, label: '마이페이지', href: '/mypage' },
+  { icon: Settings, label: '설정', href: '/settings' },
 ]
 
 const plannerNav = [
@@ -28,6 +30,7 @@ const plannerNav = [
   { icon: Sparkles, label: '플래너 라운지', href: '/' },
   { icon: Briefcase, label: '플래너 스튜디오', href: '/studio' },
   { icon: User, label: '마이페이지', href: '/mypage' },
+  { icon: Settings, label: '설정', href: '/settings' },
 ]
 
 const myWedding = [
