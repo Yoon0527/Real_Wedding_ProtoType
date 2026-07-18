@@ -20,7 +20,6 @@ import {
 const mainNav = [
   { icon: MessageCircle, label: '팩트 커뮤니티', href: '/community' },
   { icon: Sparkles, label: '플래너 라운지', href: '/' },
-  { icon: Heart, label: '마이 웨딩', href: '/wedding' },
   { icon: User, label: '마이페이지', href: '/mypage' },
   { icon: Settings, label: '설정', href: '/settings' },
 ]
