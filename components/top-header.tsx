@@ -14,10 +14,13 @@ import {
   LogOut,
   CalendarCheck,
   Sparkles,
+  X,
 } from 'lucide-react'
 import { searchExamples } from '@/lib/wedding-data'
 import { LoginModal } from '@/components/auth/login-modal'
 import { SignupModal } from '@/components/auth/signup-modal'
+
+type NotificationCategory = 'messages' | 'general'
 
 type Notification = {
   id: string
@@ -25,15 +28,17 @@ type Notification = {
   time: string
   unread: boolean
   icon: typeof Bell
+  category: NotificationCategory
 }
 
-const notifications: Notification[] = [
+const initialNotifications: Notification[] = [
   {
     id: 'n1',
     text: '김하나 플래너가 상담 문의에 답변했습니다.',
     time: '방금 전',
     unread: true,
     icon: MessageSquare,
+    category: 'messages',
   },
   {
     id: 'n2',
@@ -41,6 +46,7 @@ const notifications: Notification[] = [
     time: '2시간 전',
     unread: true,
     icon: CalendarCheck,
+    category: 'messages',
   },
   {
     id: 'n3',
@@ -48,7 +54,13 @@ const notifications: Notification[] = [
     time: '어제',
     unread: false,
     icon: Sparkles,
+    category: 'general',
   },
+]
+
+const notifTabs: { id: NotificationCategory; label: string; icon: typeof Bell }[] = [
+  { id: 'messages', label: '메시지', icon: MessageSquare },
+  { id: 'general', label: '일반', icon: Bell },
 ]
 
 const profileMenu = [
@@ -64,9 +76,22 @@ export function TopHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [openMenu, setOpenMenu] = useState<'none' | 'profile' | 'bell'>('none')
   const [authModal, setAuthModal] = useState<'none' | 'login' | 'signup'>('none')
+  const [notifTab, setNotifTab] = useState<NotificationCategory>('messages')
+  const [notifications, setNotifications] = useState<Notification[]>(initialNotifications)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const unreadCount = notifications.filter((n) => n.unread).length
+  const tabNotifications = notifications.filter((n) => n.category === notifTab)
+  const tabUnreadCount = (category: NotificationCategory) =>
+    notifications.filter((n) => n.category === category && n.unread).length
+
+  function markAllRead() {
+    setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })))
+  }
+
+  function deleteNotification(id: string) {
+    setNotifications((prev) => prev.filter((n) => n.id !== id))
+  }
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -127,35 +152,82 @@ export function TopHeader() {
                 <div className="flex items-center justify-between border-b border-border px-4 py-3">
                   <span className="text-sm font-semibold text-foreground">알림</span>
                   {unreadCount > 0 && (
-                    <span className="text-[11px] text-muted-foreground">
-                      읽지 않은 알림 {unreadCount}개
-                    </span>
+                    <button
+                      onClick={markAllRead}
+                      className="text-[11px] font-medium text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      모두 읽음
+                    </button>
                   )}
                 </div>
-                <ul className="max-h-96 overflow-y-auto">
-                  {notifications.map((n) => {
-                    const Icon = n.icon
+
+                {/* Category tabs */}
+                <div className="flex border-b border-border">
+                  {notifTabs.map((tab) => {
+                    const TabIcon = tab.icon
+                    const count = tabUnreadCount(tab.id)
                     return (
-                      <li key={n.id}>
-                        <button className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-secondary">
-                          <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                            <Icon className="size-4" />
+                      <button
+                        key={tab.id}
+                        onClick={() => setNotifTab(tab.id)}
+                        className={`flex flex-1 items-center justify-center gap-1.5 py-2.5 text-[13px] font-medium transition-colors ${
+                          notifTab === tab.id
+                            ? 'border-b-2 border-primary text-primary'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <TabIcon className="size-3.5" />
+                        {tab.label}
+                        {count > 0 && (
+                          <span className="flex min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold leading-4 text-primary-foreground">
+                            {count}
                           </span>
-                          <span className="flex-1">
-                            <span className="block text-[13px] leading-snug text-foreground">
-                              {n.text}
-                            </span>
-                            <span className="mt-0.5 block text-[11px] text-muted-foreground">
-                              {n.time}
-                            </span>
-                          </span>
-                          {n.unread && (
-                            <span className="mt-1.5 size-2 shrink-0 rounded-full bg-primary" />
-                          )}
-                        </button>
-                      </li>
+                        )}
+                      </button>
                     )
                   })}
+                </div>
+
+                <ul className="max-h-96 overflow-y-auto">
+                  {tabNotifications.length === 0 ? (
+                    <li className="flex items-center justify-center px-4 py-10 text-[13px] text-muted-foreground">
+                      새로운 알림이 없습니다.
+                    </li>
+                  ) : (
+                    tabNotifications.map((n) => {
+                      const Icon = n.icon
+                      return (
+                        <li key={n.id} className="group relative">
+                          <button className="flex w-full items-start gap-3 py-3 pl-4 pr-9 text-left transition-colors hover:bg-secondary">
+                            <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
+                              <Icon className="size-4" />
+                            </span>
+                            <span className="flex-1">
+                              <span className="block text-[13px] leading-snug text-foreground">
+                                {n.text}
+                              </span>
+                              <span className="mt-0.5 block text-[11px] text-muted-foreground">
+                                {n.time}
+                              </span>
+                            </span>
+                            {n.unread && (
+                              <span className="mt-1.5 size-2 shrink-0 rounded-full bg-primary" />
+                            )}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              deleteNotification(n.id)
+                            }}
+                            aria-label="알림 삭제"
+                            className="absolute right-2 top-2 flex size-6 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-opacity hover:bg-muted hover:text-foreground group-hover:opacity-100"
+                          >
+                            <X className="size-3.5" />
+                          </button>
+                        </li>
+                      )
+                    })
+                  )}
                 </ul>
                 <button className="block w-full border-t border-border py-3 text-center text-[13px] font-medium text-primary transition-colors hover:bg-secondary">
                   알림 전체 보기
